@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F9F7EF"
+    android:padding="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:text="凌睿"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/tv_name"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:drawablePadding="4dp"
+        android:drawableRight="@drawable/ic_like"
+        android:gravity="center"
+        android:text="10814"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_date"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/iv_avatar" />
+</RelativeLayout>

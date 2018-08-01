@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wish_to_see">%d人想看</string>
+    <string name="wish_to_see_thousand">%s万人想看</string>
+</resources>

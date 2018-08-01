@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    tools:context=".fragment.TheaterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="@dimen/statusBarSize">
+
+        <me.maxandroid.doubanfilm.common.widget.DrawableCenterTextView
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/ic_more_unfold"
+            android:gravity="center"
+            android:text="北京"
+            android:textSize="16sp" />
+
+        <me.maxandroid.doubanfilm.common.widget.DrawableCenterTextView
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="4"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:gravity="center_vertical"
+            android:text="@string/search_movie_cast" />
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

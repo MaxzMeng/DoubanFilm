@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_movie_cast">电影/影人</string>
+    <string name="detail_no_rate">暂无评分</string>
+    <string name="detail_director">导演:%s</string>
+    <string name="detail_casts_none">主演:无详细信息</string>
+    <string name="detail_casts_one">主演:%s</string>
+    <string name="detail_casts_two">主演:%s/%s</string>
+    <string name="detail_casts_three">主演:%s/%s/%s</string>
+    <string name="detail_rate">评分:%s</string>
+    <string name="have_seen">%d人看过</string>
+    <string name="have_seen_ten_thousand">%s万人看过</string>
+
+    <string name="detail_time_and_genres">%s/%s</string>
+    <string name="detail_rate_no_description">%f</string>
+    <string name="detail_rating_count">%d人</string>
+    <string name="detail_douban">豆瓣评分</string>
+    <string name="lable_movie">电影</string>
+</resources>

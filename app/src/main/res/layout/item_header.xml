@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sticky_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        tools:text="2017年09月27日" />
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="item_find">找片</string>
+    <string name="item_comming">即将上映</string>
+    <string name="item_hot">热映</string>
+</resources>
