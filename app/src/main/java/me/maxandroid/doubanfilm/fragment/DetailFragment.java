@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import me.maxandroid.doubanfilm.R;
 import me.maxandroid.doubanfilm.R2;
+import me.maxandroid.doubanfilm.api.common.Avatars;
 import me.maxandroid.doubanfilm.api.common.Cast;
 import me.maxandroid.doubanfilm.api.subject.Comment;
 import me.maxandroid.doubanfilm.api.subject.Directors;
@@ -55,13 +57,9 @@ public class DetailFragment extends BaseFragment {
     LinearLayout mCastLayout;
     @BindView(R2.id.recycler)
     RecyclerView mRecycler;
-
+    @BindView(R2.id.progress_bar)
+    ProgressBar progressBar;
     RecyclerAdapter mAdapter;
-    //    @BindView(R.id.appbar)
-//    AppBarLayout mAppBarLayout;
-//    @BindView(R2.id.nested_scroll_view)
-//    NestedScrollView scrollView;
-//    int total;
 
 
     public static DetailFragment newInstance(String id) {
@@ -134,9 +132,15 @@ public class DetailFragment extends BaseFragment {
                 for (int i = 0; i < directors.size(); i++) {
                     View v = inflater.inflate(R.layout.item_cast, mCastLayout, false);
                     ImageView castImage = v.findViewById(R.id.iv_cast);
-                    Glide.with(getContext()).load(directors.get(i).getAvatars().getSmall()).into(castImage);
+                    Avatars avatar = directors.get(i).getAvatars();
                     TextView mName = v.findViewById(R.id.tv_cast_name);
-                    mName.setText(directors.get(i).getName());
+                    String name = directors.get(i).getName();
+                    if (avatar == null || name == null) {
+                        v = null;
+                        continue;
+                    }
+                    Glide.with(getContext()).load(avatar.getSmall()).into(castImage);
+                    mName.setText(name);
                     mCastLayout.addView(v);
                 }
                 for (int i = 0; i < casts.size(); i++) {
@@ -161,6 +165,8 @@ public class DetailFragment extends BaseFragment {
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
                 mAdapter.add(response.body());
                 mAdapter.notifyDataSetChanged();
+                mRecycler.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -169,6 +175,7 @@ public class DetailFragment extends BaseFragment {
             }
         });
     }
+
 
     class CommentViewHolder extends RecyclerAdapter.ViewHolder<Comment> {
         @BindView(R2.id.iv_avatar)

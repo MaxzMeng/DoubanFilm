@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.SwipeBackLayout;
+import me.yokeyword.fragmentation_swipeback.core.ISwipeBackFragment;
 
-public abstract class BaseFragment extends SupportFragment {
+public abstract class BaseFragment extends SupportFragment{
     private Unbinder mUnbinder = null;
 
     @LayoutRes

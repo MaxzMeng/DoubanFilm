@@ -30,7 +30,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CommingFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class CommingFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, StrikeAdapterImp.OnItemClickListener {
 
     @BindView(R2.id.recycler)
     StrikeHeaderRecyclerView mRecycler;
@@ -50,6 +50,7 @@ public class CommingFragment extends BaseFragment implements SwipeRefreshLayout.
         mRecycler.setRefreshListener(this);
         mRecycler.setAdapter(new StrikeAdapterImp(lists, getContext()));
         mAdapter = mRecycler.getAdapter();
+        ((StrikeAdapterImp) mAdapter).setListener(this);
     }
 
     @Override
@@ -79,5 +80,12 @@ public class CommingFragment extends BaseFragment implements SwipeRefreshLayout.
                 Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    @Override
+    public void onClick(int position) {
+//        start(DetailFragment.newInstance(((ComingSubject) lists.get(position)).getId() + ""));
+        ((MainFragment) getParentFragment()).start(DetailFragment.newInstance(((ComingSubject) lists.get(position)).getId() + ""));
     }
 }

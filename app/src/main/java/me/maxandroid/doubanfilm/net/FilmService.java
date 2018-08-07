@@ -7,6 +7,7 @@ import me.maxandroid.doubanfilm.api.celebrity.CelebrityRspModel;
 import me.maxandroid.doubanfilm.api.coming.ComingSubject;
 import me.maxandroid.doubanfilm.api.common.Subject;
 import me.maxandroid.doubanfilm.api.subject.Comment;
+import me.maxandroid.doubanfilm.api.subject.SimpleSubject;
 import me.maxandroid.doubanfilm.api.subject.SubjectRspModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -28,7 +29,7 @@ public interface FilmService {
     Call<RspModel<List<Subject>>> searchMovieByQ(@Query("q") String Q);
 
     @GET("top250")
-    Call<RspModel<List<Subject>>> getTop250();
+    Call<RspModel<List<Subject>>> getTop250(@Query("start") int start, @Query("count") int count);
 
     @GET("us_box")
     Call<RspModel<List<Subject>>> getUSBox();
@@ -41,4 +42,7 @@ public interface FilmService {
 
     @GET("comment/{id}")
     Call<List<Comment>> getComments(@Path("id") String id);
+
+    @GET("movie_hot")
+    Call<List<SimpleSubject>> getHot();
 }

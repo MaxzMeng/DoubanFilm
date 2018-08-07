@@ -40,6 +40,8 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
         View v = target.findViewById(R.id.ll_image);
         if (v != null) {
             targetHeight = v.getBottom();
+        } else {
+            targetHeight = 0;
         }
 
 
@@ -50,7 +52,7 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
             child.setBackgroundColor(Color.argb((int) alpha, RGB_VALUE.getRed(), RGB_VALUE.getGreen(), RGB_VALUE.getBlue()));
             ((TextView) child.findViewById(R.id.tv_title)).setText("电影");
         } else if (mDistanceY > targetHeight) {
-//            child.setBackgroundColor(Color.rgb(RGB_VALUE.getRed(), RGB_VALUE.getGreen(), RGB_VALUE.getGreen()));
+            child.setBackgroundColor(Color.rgb(RGB_VALUE.getRed(), RGB_VALUE.getGreen(), RGB_VALUE.getBlue()));
             child.findViewById(R.id.iv_popcorn).setVisibility(View.GONE);
 
             ((TextView) child.findViewById(R.id.tv_title)).setText(child.getTitle());

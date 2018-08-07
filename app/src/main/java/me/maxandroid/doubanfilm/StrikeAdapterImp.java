@@ -20,6 +20,7 @@ import me.maxandroid.doubanfilm.common.widget.recycler.StrikeAdapter;
 import me.maxandroid.doubanfilm.util.TextContentUtil;
 
 public class StrikeAdapterImp extends StrikeAdapter {
+    OnItemClickListener listener;
 
     public StrikeAdapterImp(List<Model> dataList, Context mContext) {
         super(dataList, mContext);
@@ -35,8 +36,16 @@ public class StrikeAdapterImp extends StrikeAdapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StrikeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StrikeViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onClick(position);
+                }
+            }
+        });
         ComingSubject subject = (ComingSubject) dataList.get(position);
 //        ComingSubject subject = dataList.get(position);
 //        holder.contentView.findViewById(R.id.iv_image);
@@ -68,5 +77,13 @@ public class StrikeAdapterImp extends StrikeAdapter {
 //            contentView = itemView.findViewById(R.id.item_content_view);
 //            mImage = itemView.findViewById(R.id.iv_image);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onClick(int postion);
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
