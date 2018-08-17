@@ -117,8 +117,8 @@
         android:layout_height="1dp"
         android:background="@color/gray" />
 
-    <me.maxandroid.doubanfilm.common.widget.HorListRecycler
-        android:id="@+id/hl_recycler"
+    <include
+        layout="@layout/layout_hor_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="8dp"

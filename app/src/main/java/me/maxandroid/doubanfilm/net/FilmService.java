@@ -9,6 +9,7 @@ import me.maxandroid.doubanfilm.api.common.Subject;
 import me.maxandroid.doubanfilm.api.subject.Comment;
 import me.maxandroid.doubanfilm.api.subject.SimpleSubject;
 import me.maxandroid.doubanfilm.api.subject.SubjectRspModel;
+import me.maxandroid.doubanfilm.api.subject.Subjects;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -32,7 +33,7 @@ public interface FilmService {
     Call<RspModel<List<Subject>>> getTop250(@Query("start") int start, @Query("count") int count);
 
     @GET("us_box")
-    Call<RspModel<List<Subject>>> getUSBox();
+    Call<RspModel<List<Subjects>>> getUSBox();
 
     @GET("in_theaters")
     Call<RspModel<List<Subject>>> getInTheaters();

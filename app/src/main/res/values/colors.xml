@@ -12,4 +12,9 @@
     <color name="blue">#0000ff</color>
     <color name="gray">#F5F5F5</color>
     <color name="white">#ffffff</color>
+
+    <color name="top_1">#FF4C5F</color>
+    <color name="top_2">#F98E58</color>
+    <color name="top_3">#FFCD87</color>
+    <color name="top_default">#9F9F9F</color>
 </resources>

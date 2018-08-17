@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_label_none">无标签</string>
+    <string name="detail_label_one">%s</string>
+    <string name="detail_label_two">%s·%s</string>
+    <string name="detail_label_three">%s·%s·%s</string>
+    <string name="detail_us_money">票房%d万美元</string>
+</resources>

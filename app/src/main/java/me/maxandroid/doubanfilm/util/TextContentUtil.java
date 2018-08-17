@@ -47,4 +47,40 @@ public class TextContentUtil {
             textView.setText(String.format(context.getString(R.string.wish_to_see), num));
         }
     }
+
+    public static void setLabel(Context context, TextView textView, Subject subject) {
+        switch (subject.getGenres().size()) {
+            case 0:
+                textView.setText(context.getResources().getString(R.string.detail_label_none));
+                break;
+            case 1:
+                textView.setText(String.format(context.getResources().getString(R.string.detail_label_one), subject.getGenres().get(0)));
+                break;
+            case 2:
+                textView.setText(String.format(context.getResources().getString(R.string.detail_label_two), subject.getGenres().get(0), subject.getGenres().get(1)));
+                break;
+            default:
+                textView.setText(String.format(context.getResources().getString(R.string.detail_label_three), subject.getGenres().get(0), subject.getGenres().get(1), subject.getGenres().get(2)));
+        }
+    }
+
+    public static void setTopColor(TextView textView, int topNum) {
+        Context context = textView.getContext();
+        int color;
+        switch (topNum) {
+            case 1:
+                color = context.getResources().getColor(R.color.top_1);
+                break;
+            case 2:
+                color = context.getResources().getColor(R.color.top_2);
+                break;
+            case 3:
+                color = context.getResources().getColor(R.color.top_3);
+                break;
+            default:
+                color = context.getResources().getColor(R.color.top_default);
+                break;
+        }
+        textView.setTextColor(color);
+    }
 }

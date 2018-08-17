@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/item_header" />
-
     <LinearLayout
         android:id="@+id/item_content_view"
         android:layout_width="match_parent"

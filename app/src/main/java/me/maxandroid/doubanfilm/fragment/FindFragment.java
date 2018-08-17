@@ -1,13 +1,13 @@
 package me.maxandroid.doubanfilm.fragment;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -18,25 +18,20 @@ import butterknife.OnClick;
 import me.maxandroid.doubanfilm.R;
 import me.maxandroid.doubanfilm.R2;
 import me.maxandroid.doubanfilm.api.subject.SimpleSubject;
-import me.maxandroid.doubanfilm.common.app.BaseFragment;
-import me.maxandroid.doubanfilm.common.widget.HorListRecycler;
+import me.maxandroid.doubanfilm.common.app.RecyclerFragment;
 import me.maxandroid.doubanfilm.common.widget.recycler.RecyclerAdapter;
 import me.maxandroid.doubanfilm.net.NetWork;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FindFragment extends BaseFragment {
-    @BindView(R2.id.hl_recycler)
-    HorListRecycler mRecycler;
-    RecyclerAdapter<SimpleSubject> mAdapter;
+public class FindFragment extends RecyclerFragment<List<SimpleSubject>, SimpleSubject> {
 
     public FindFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -46,8 +41,8 @@ public class FindFragment extends BaseFragment {
     }
 
     @Override
-    public void onBindView(@Nullable Bundle savedInstanceState, final View rootView) {
-        mAdapter = new RecyclerAdapter<SimpleSubject>() {
+    protected RecyclerAdapter<SimpleSubject> setAdapter() {
+        return new RecyclerAdapter<SimpleSubject>() {
             @Override
             protected int getItemViewType(int position, SimpleSubject simpleSubject) {
                 return R.layout.item_hot;
@@ -58,31 +53,39 @@ public class FindFragment extends BaseFragment {
                 return new HotViewHolder(root);
             }
         };
-        mRecycler.setAdapter(mAdapter);
-        mAdapter.setListener(new RecyclerAdapter.AdapterListenerImpl<SimpleSubject>() {
-            @Override
-            public void onItemClick(RecyclerAdapter.ViewHolder holder, SimpleSubject simpleSubject) {
-                ((MainFragment) getParentFragment()).start(DetailFragment.newInstance(simpleSubject.getId() + ""));
-            }
-        });
     }
 
     @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        Call<List<SimpleSubject>> call = NetWork.remote().getHot();
-        call.enqueue(new Callback<List<SimpleSubject>>() {
-            @Override
-            public void onResponse(Call<List<SimpleSubject>> call, Response<List<SimpleSubject>> response) {
-                mAdapter.add(response.body());
-                Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
-            }
+    protected int getRecyclerId() {
+        return R.id.recycler;
+    }
 
-            @Override
-            public void onFailure(Call<List<SimpleSubject>> call, Throwable t) {
+    @Override
+    protected RecyclerView.LayoutManager getLayoutManager() {
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        return manager;
+    }
 
-            }
-        });
+
+    @Override
+    protected Call<List<SimpleSubject>> setCall() {
+        return NetWork.remote().getHot();
+    }
+
+    @Override
+    public void onItemClick(RecyclerAdapter.ViewHolder holder, SimpleSubject simpleSubject) {
+        ((MainFragment) getParentFragment()).start(DetailFragment.newInstance(simpleSubject.getId() + ""));
+    }
+
+    @Override
+    public void onResponse(Call<List<SimpleSubject>> call, Response<List<SimpleSubject>> response) {
+        mAdapter.replace(response.body());
+    }
+
+    @Override
+    public void onFailure(Call<List<SimpleSubject>> call, Throwable t) {
+
     }
 
     @OnClick(R2.id.ll_search)
@@ -92,7 +95,7 @@ public class FindFragment extends BaseFragment {
 
     @OnClick(R2.id.ll_us)
     void usClick() {
-
+        ((MainFragment) getParentFragment()).start(new TopFragment());
     }
 
     @OnClick(R2.id.ll_top)

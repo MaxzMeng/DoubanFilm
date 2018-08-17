@@ -19,6 +19,5 @@ public class MainActivity extends BaseActivity {
         container.setId(R.id.fragment_container);
         setContentView(container);
         loadRootFragment(R.id.fragment_container, new MainFragment());
-
     }
 }
