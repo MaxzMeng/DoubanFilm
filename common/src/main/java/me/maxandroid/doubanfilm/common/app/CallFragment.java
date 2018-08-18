@@ -20,7 +20,9 @@ public abstract class CallFragment<RspModel> extends BaseFragment implements Cal
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        call.enqueue(this);
+        if (call != null) {
+            call.enqueue(this);
+        }
         firstInit = false;
     }
 

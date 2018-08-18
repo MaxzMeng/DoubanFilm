@@ -3,8 +3,11 @@ package me.maxandroid.doubanfilm.util;
 import android.content.Context;
 import android.widget.TextView;
 
+import java.util.List;
+
 import me.maxandroid.doubanfilm.R;
 import me.maxandroid.doubanfilm.api.common.Subject;
+import me.maxandroid.doubanfilm.api.subject.Directors;
 
 public class TextContentUtil {
     public static void setCastName(Context context, TextView textView, Subject subject, int num) {
@@ -82,5 +85,14 @@ public class TextContentUtil {
                 break;
         }
         textView.setTextColor(color);
+    }
+
+    public static void setDirectorName(Context context, TextView mDirector, List<Directors> directors) {
+        int size = directors.size();
+        if (size == 0) {
+            mDirector.setText(context.getResources().getString(R.string.detail_no_director));
+        } else {
+            mDirector.setText(String.format(context.getResources().getString(R.string.detail_director), directors.get(0).getName()));
+        }
     }
 }

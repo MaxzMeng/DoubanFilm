@@ -15,11 +15,14 @@ import retrofit2.Response;
 public abstract class RecyclerFragment<RspModel, Model> extends CallFragment<RspModel> implements RecyclerAdapter.AdapterListener<Model>, Callback<RspModel> {
     protected RecyclerView mRecycler;
     protected RecyclerAdapter<Model> mAdapter;
-
+    protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRecycler = rootView.findViewById(getRecyclerId());
+        if (getLayoutManager() == null) {
+            setLayoutManager(new LinearLayoutManager(getContext()));
+        }
         mRecycler.setLayoutManager(getLayoutManager());
         mRecycler.setAdapter(mAdapter = setAdapter());
         mAdapter.setListener(this);
@@ -31,8 +34,12 @@ public abstract class RecyclerFragment<RspModel, Model> extends CallFragment<Rsp
     @IdRes
     protected abstract int getRecyclerId();
 
-    protected RecyclerView.LayoutManager getLayoutManager() {
-        return new LinearLayoutManager(getContext());
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return mLayoutManager;
+    }
+
+    public void setLayoutManager(RecyclerView.LayoutManager mLayoutManager) {
+        this.mLayoutManager = mLayoutManager;
     }
 
     @Override

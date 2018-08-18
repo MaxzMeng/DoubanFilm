@@ -2,9 +2,7 @@ package me.maxandroid.doubanfilm.api.coming;
 
 import com.google.gson.annotations.SerializedName;
 
-import me.maxandroid.doubanfilm.common.widget.recycler.Model;
-
-public class ComingSubject implements Model {
+public class ComingSubject {
     @SerializedName("doubanId")
     private int id;
     private String avatar;
@@ -77,8 +75,4 @@ public class ComingSubject implements Model {
         return like;
     }
 
-    @Override
-    public String getHeader() {
-        return getDate();
-    }
 }

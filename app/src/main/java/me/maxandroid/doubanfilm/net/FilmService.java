@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.maxandroid.doubanfilm.api.RspModel;
 import me.maxandroid.doubanfilm.api.celebrity.CelebrityRspModel;
+import me.maxandroid.doubanfilm.api.city.Province;
 import me.maxandroid.doubanfilm.api.coming.ComingSubject;
 import me.maxandroid.doubanfilm.api.common.Subject;
 import me.maxandroid.doubanfilm.api.subject.Comment;
@@ -36,7 +37,7 @@ public interface FilmService {
     Call<RspModel<List<Subjects>>> getUSBox();
 
     @GET("in_theaters")
-    Call<RspModel<List<Subject>>> getInTheaters();
+    Call<RspModel<List<Subject>>> getInTheaters(@Query("start") int start, @Query("count") int count, @Query("city") String city);
 
     @GET("coming_soon")
     Call<List<ComingSubject>> getComing();
@@ -46,4 +47,7 @@ public interface FilmService {
 
     @GET("movie_hot")
     Call<List<SimpleSubject>> getHot();
+
+    @GET("city")
+    Call<List<Province>> getCities();
 }

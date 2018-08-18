@@ -87,7 +87,7 @@ public class DetailFragment extends BaseFragment {
         ID = getArguments().getString(SUBJECT_ID, "");
         if (ID.isEmpty()) {
             Toast.makeText(getContext(), "获取失败", Toast.LENGTH_SHORT).show();
-            getActivity().onBackPressed();
+            pop();
         }
 
     }

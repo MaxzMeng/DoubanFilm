@@ -3,6 +3,7 @@
     <string name="search_movie_cast">电影/影人</string>
     <string name="detail_no_rate">暂无评分</string>
     <string name="detail_director">导演:%s</string>
+    <string name="detail_no_director">暂无导演信息</string>
     <string name="detail_casts_none">主演:无详细信息</string>
     <string name="detail_casts_one">主演:%s</string>
     <string name="detail_casts_two">主演:%s/%s</string>

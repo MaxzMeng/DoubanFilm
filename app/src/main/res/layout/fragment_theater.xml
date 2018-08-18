@@ -19,6 +19,7 @@
         android:paddingTop="@dimen/statusBarSize">
 
         <me.maxandroid.doubanfilm.common.widget.DrawableCenterTextView
+            android:id="@+id/tv_city"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_weight="1"

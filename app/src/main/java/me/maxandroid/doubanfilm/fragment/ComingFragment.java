@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import butterknife.BindView;
-import me.maxandroid.doubanfilm.common.widget.recycler.StrikeHeaderDecoration;
 import me.maxandroid.doubanfilm.R;
 import me.maxandroid.doubanfilm.R2;
 import me.maxandroid.doubanfilm.api.coming.ComingSubject;
 import me.maxandroid.doubanfilm.common.app.RecyclerFragment;
 import me.maxandroid.doubanfilm.common.widget.recycler.RecyclerAdapter;
+import me.maxandroid.doubanfilm.common.widget.recycler.StrikeHeaderDecoration;
 import me.maxandroid.doubanfilm.net.NetWork;
 import me.maxandroid.doubanfilm.util.TextContentUtil;
 import retrofit2.Call;
@@ -48,7 +48,7 @@ public class ComingFragment extends RecyclerFragment<List<ComingSubject>, Coming
         mRecycler.addItemDecoration(new StrikeHeaderDecoration() {
             @Override
             public String getHeaderName(int pos) {
-                return mAdapter.getItems().get(pos).getHeader();
+                return mAdapter.getItems().get(pos).getDate();
             }
         });
     }
