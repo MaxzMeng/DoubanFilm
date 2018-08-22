@@ -40,9 +40,16 @@ public class TheaterFragment extends PagingRecyclerFragment<RspModel<List<Subjec
     TextView mCity;
     String cityName;
 
+    boolean isOnRefresh = false;
+
+    private static final String PREF_SETTING = "settings";
+    private static final String CITY_NAME = "city_name";
+    private static final String CITY_ALIAS = "city_alias";
+    private static final String CITY_DEFAULT = "北京";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        cityName = SharedPrefsUtil.getValue(getContext(), "settings", "city_name", "北京");
+        cityName = SharedPrefsUtil.getValue(getContext(), PREF_SETTING, CITY_NAME, CITY_DEFAULT);
         super.onCreate(savedInstanceState);
     }
 
@@ -104,9 +111,8 @@ public class TheaterFragment extends PagingRecyclerFragment<RspModel<List<Subjec
 
     @Override
     public void onRefresh() {
-        mRefresh.setRefreshing(true);
-        mAdapter.clear();
-        resetData();
+        isOnRefresh = true;
+        mRefresh.setRefreshing(isOnRefresh);
         setCall().clone().enqueue(this);
     }
 
@@ -119,13 +125,23 @@ public class TheaterFragment extends PagingRecyclerFragment<RspModel<List<Subjec
 
     @Override
     public void onResponse(Call<RspModel<List<Subject>>> call, Response<RspModel<List<Subject>>> response) {
+        if (start == 0 && !firstInit) {
+            Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
+        }
+        if (isOnRefresh) {
+            mAdapter.clear();
+            resetData();
+            isOnRefresh = false;
+        }
+        mRefresh.setRefreshing(isOnRefresh);
         totalCount = response.body().getTotal();
         mAdapter.add(response.body().getResult());
-        mRefresh.setRefreshing(false);
+        super.onResponse(call, response);
     }
 
     @Override
     public void onFailure(Call<RspModel<List<Subject>>> call, Throwable t) {
+        mRefresh.setRefreshing(false);
         Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
     }
 
@@ -136,8 +152,8 @@ public class TheaterFragment extends PagingRecyclerFragment<RspModel<List<Subjec
 
     @Override
     public void onCityChanged(City city) {
-        SharedPrefsUtil.putValue(getContext(), "settings", "city_name", city.getName());
-        SharedPrefsUtil.putValue(getContext(), "settings", "city_alias", city.getAlias());
+        SharedPrefsUtil.putValue(getContext(), PREF_SETTING, CITY_NAME, city.getName());
+        SharedPrefsUtil.putValue(getContext(), PREF_SETTING, CITY_ALIAS, city.getAlias());
         cityName = city.getName();
         mCity.setText(cityName);
         onRefresh();

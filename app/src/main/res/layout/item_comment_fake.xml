@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F9F7EF"
+    android:padding="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@color/grayDeep" />
+
+    <View
+        android:id="@+id/view_name"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:background="@color/grayDeep" />
+
+    <View
+        android:id="@+id/view_date"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/view_name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:background="@color/grayDeep"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/view_comment"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/view_date"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:background="@color/grayDeep" />
+</RelativeLayout>

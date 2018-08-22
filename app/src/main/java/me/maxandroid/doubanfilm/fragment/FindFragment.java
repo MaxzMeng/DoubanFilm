@@ -101,12 +101,12 @@ public class FindFragment extends RecyclerFragment<List<SimpleSubject>, SimpleSu
 
     @OnClick(R2.id.ll_us)
     void usClick() {
-        ((MainFragment) getParentFragment()).start(new TopFragment());
+        ((MainFragment) getParentFragment()).start(new USBoxFragment());
     }
 
     @OnClick(R2.id.ll_top)
     void topClick() {
-
+        ((MainFragment) getParentFragment()).start(new TopFragment());
     }
 
     class HotViewHolder extends RecyclerAdapter.ViewHolder<SimpleSubject> {

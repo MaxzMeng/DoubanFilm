@@ -98,6 +98,11 @@ public class ComingFragment extends RecyclerFragment<List<ComingSubject>, Coming
     }
 
     @Override
+    public void onFailure(Call<List<ComingSubject>> call, Throwable t) {
+        mRefresh.setRefreshing(false);
+    }
+
+    @Override
     public void onItemClick(RecyclerAdapter.ViewHolder holder, ComingSubject comingSubject) {
         ((MainFragment) getParentFragment()).start(DetailFragment.newInstance(comingSubject.getId() + ""));
     }

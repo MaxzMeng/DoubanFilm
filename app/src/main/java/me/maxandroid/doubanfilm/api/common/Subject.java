@@ -1,10 +1,10 @@
 package me.maxandroid.doubanfilm.api.common;
 
-import me.maxandroid.doubanfilm.api.subject.Directors;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import me.maxandroid.doubanfilm.api.subject.Directors;
 
 public class Subject {
     private Rating rating;
@@ -127,5 +127,4 @@ public class Subject {
     public String getId() {
         return id;
     }
-
 }

@@ -23,7 +23,6 @@ public abstract class CallFragment<RspModel> extends BaseFragment implements Cal
         if (call != null) {
             call.enqueue(this);
         }
-        firstInit = false;
     }
 
 
@@ -31,7 +30,9 @@ public abstract class CallFragment<RspModel> extends BaseFragment implements Cal
 
     @Override
     public void onResponse(Call<RspModel> call, Response<RspModel> response) {
-
+        if (firstInit == true) {
+            firstInit = false;
+        }
     }
 
     @Override

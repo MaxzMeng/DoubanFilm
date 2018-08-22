@@ -134,6 +134,7 @@ public class CityPickFragment extends RecyclerFragment<List<Province>, CityModel
             });
             mAdapter.replace(cityList);
             currentLevel = CITY_LEVEL;
+            mRecycler.scrollToPosition(0);
         } else {
             pop();
             if (listener != null) {

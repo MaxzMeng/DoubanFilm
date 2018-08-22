@@ -81,7 +81,7 @@ public class TextContentUtil {
                 color = context.getResources().getColor(R.color.top_3);
                 break;
             default:
-                color = context.getResources().getColor(R.color.top_default);
+                color = context.getResources().getColor(R.color.grayDeep);
                 break;
         }
         textView.setTextColor(color);

@@ -23,7 +23,9 @@ public abstract class RecyclerFragment<RspModel, Model> extends CallFragment<Rsp
         if (getLayoutManager() == null) {
             setLayoutManager(new LinearLayoutManager(getContext()));
         }
-        mRecycler.setLayoutManager(getLayoutManager());
+        if (mRecycler.getLayoutManager() == null) {
+            mRecycler.setLayoutManager(getLayoutManager());
+        }
         mRecycler.setAdapter(mAdapter = setAdapter());
         mAdapter.setListener(this);
     }
@@ -54,7 +56,7 @@ public abstract class RecyclerFragment<RspModel, Model> extends CallFragment<Rsp
 
     @Override
     public void onResponse(Call<RspModel> call, Response<RspModel> response) {
-
+        super.onResponse(call, response);
     }
 
     @Override

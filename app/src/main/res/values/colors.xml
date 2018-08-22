@@ -16,5 +16,5 @@
     <color name="top_1">#FF4C5F</color>
     <color name="top_2">#F98E58</color>
     <color name="top_3">#FFCD87</color>
-    <color name="top_default">#9F9F9F</color>
+    <color name="grayDeep">#9F9F9F</color>
 </resources>

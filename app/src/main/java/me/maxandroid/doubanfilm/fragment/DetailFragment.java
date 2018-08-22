@@ -1,8 +1,10 @@
 package me.maxandroid.doubanfilm.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,9 +58,7 @@ public class DetailFragment extends BaseFragment {
     LinearLayout mCastLayout;
     @BindView(R2.id.recycler)
     RecyclerView mRecycler;
-    @BindView(R2.id.progress_bar)
-    ProgressBar progressBar;
-    RecyclerAdapter mAdapter;
+    RecyclerAdapter<Comment> mAdapter;
 
 
     public static DetailFragment newInstance(String id) {
@@ -78,6 +77,7 @@ public class DetailFragment extends BaseFragment {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        DrawableCompat.setTint(mBack.getDrawable(), Color.WHITE);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +89,6 @@ public class DetailFragment extends BaseFragment {
             Toast.makeText(getContext(), "获取失败", Toast.LENGTH_SHORT).show();
             pop();
         }
-
     }
 
     @Override
@@ -97,17 +96,35 @@ public class DetailFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecycler.setAdapter(mAdapter = new RecyclerAdapter() {
+        mRecycler.setAdapter(mAdapter = new RecyclerAdapter<Comment>() {
             @Override
-            protected int getItemViewType(int position, Object o) {
-                return R.layout.item_comment;
+            protected int getItemViewType(int position, Comment comment) {
+                if (comment.getId() == 0 && comment.getName().equals("fake")) {
+                    return R.layout.item_comment_fake;
+                } else {
+                    return R.layout.item_comment;
+                }
             }
 
             @Override
             protected ViewHolder onCreateViewHolder(View root, int viewType) {
-                return new CommentViewHolder(root);
+                if (viewType == R.layout.item_comment_fake) {
+                    return new FakeCommentHolder(root);
+                } else {
+                    return new CommentViewHolder(root);
+                }
             }
         });
+        setFakeData(2);
+    }
+
+    private void setFakeData(int num) {
+        for (int i = 0; i < num; i++) {
+            Comment comment = new Comment();
+            comment.setId(0);
+            comment.setName("fake");
+            mAdapter.add(comment);
+        }
     }
 
     @Override
@@ -163,10 +180,8 @@ public class DetailFragment extends BaseFragment {
         commentCall.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                mAdapter.clear();
                 mAdapter.add(response.body());
-                mAdapter.notifyDataSetChanged();
-                mRecycler.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -203,6 +218,19 @@ public class DetailFragment extends BaseFragment {
             mVote.setText(comment.getVotes() + "");
             mComment.setText(comment.getText());
             mData.setText(comment.getTime());
+
+        }
+    }
+
+    class FakeCommentHolder extends RecyclerAdapter.ViewHolder<Comment> {
+
+        public FakeCommentHolder(View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        protected void onBind(Comment comment) {
+
         }
     }
 

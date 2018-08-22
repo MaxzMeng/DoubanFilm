@@ -54,12 +54,8 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
         } else if (mDistanceY > targetHeight) {
             child.setBackgroundColor(Color.rgb(RGB_VALUE.getRed(), RGB_VALUE.getGreen(), RGB_VALUE.getBlue()));
             child.findViewById(R.id.iv_popcorn).setVisibility(View.GONE);
-
             ((TextView) child.findViewById(R.id.tv_title)).setText(child.getTitle());
-
-
         }
     }
-
 }
 
