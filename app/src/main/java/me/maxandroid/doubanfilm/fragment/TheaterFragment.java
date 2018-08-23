@@ -111,17 +111,17 @@ public class TheaterFragment extends PagingRecyclerFragment<RspModel<List<Subjec
 
     @Override
     public void onRefresh() {
+        resetData();
         isOnRefresh = true;
         mRefresh.setRefreshing(isOnRefresh);
         setCall().clone().enqueue(this);
     }
 
-
-    @Override
-    protected void onLoadMore() {
-        super.onLoadMore();
-        setCall().clone().enqueue(this);
+    @OnClick(R2.id.tv_search)
+    public void onSearchClick() {
+        ((MainFragment) getParentFragment()).start(new SearchByQFragment());
     }
+
 
     @Override
     public void onResponse(Call<RspModel<List<Subject>>> call, Response<RspModel<List<Subject>>> response) {
@@ -130,7 +130,6 @@ public class TheaterFragment extends PagingRecyclerFragment<RspModel<List<Subjec
         }
         if (isOnRefresh) {
             mAdapter.clear();
-            resetData();
             isOnRefresh = false;
         }
         mRefresh.setRefreshing(isOnRefresh);

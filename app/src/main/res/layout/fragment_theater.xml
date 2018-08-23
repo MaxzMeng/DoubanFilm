@@ -29,6 +29,7 @@
             android:textSize="16sp" />
 
         <me.maxandroid.doubanfilm.common.widget.DrawableCenterTextView
+            android:id="@+id/tv_search"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginLeft="16dp"

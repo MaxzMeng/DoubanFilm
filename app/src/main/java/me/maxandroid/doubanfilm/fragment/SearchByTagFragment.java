@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,7 +23,7 @@ import me.maxandroid.doubanfilm.R;
 import me.maxandroid.doubanfilm.R2;
 import me.maxandroid.doubanfilm.api.RspModel;
 import me.maxandroid.doubanfilm.api.common.Subject;
-import me.maxandroid.doubanfilm.common.app.RecyclerFragment;
+import me.maxandroid.doubanfilm.common.app.PagingRecyclerFragment;
 import me.maxandroid.doubanfilm.common.widget.recycler.RecyclerAdapter;
 import me.maxandroid.doubanfilm.net.NetWork;
 import me.maxandroid.doubanfilm.util.TextContentUtil;
@@ -34,56 +33,43 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopFragment extends RecyclerFragment<RspModel<List<Subject>>, Subject> {
+public class SearchByTagFragment extends PagingRecyclerFragment<RspModel<List<Subject>>, Subject> {
 
-    int start = 0;
-    @BindView(R2.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R2.id.tablayout)
-    TabLayout mTabLayout;
+    private static final String[] tagName = new String[]{
+            "剧情", "喜剧", "动作", "爱情", "科幻", "悬疑", "惊悚", "恐怖", "犯罪", "同性", "音乐", "歌舞", "传记", "历史", "战争", "西部", "奇幻", "冒险", "灾难", "武侠", "情色"
+    };
+    private String tag = tagName[0];
+
     @BindView(R2.id.progress_bar)
     ProgressBar progressBar;
-    List<Subject> allSubjects = new ArrayList<>();
+    @BindView(R2.id.tablayout)
+    TabLayout mTabLayout;
+    @BindView(R2.id.toolbar)
+    Toolbar toolbar;
 
-    public TopFragment() {
+    public SearchByTagFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        for (int i = 0; i < 250; i++) {
-            allSubjects.add(null);
-        }
-    }
-
-    @Override
-    public int setLayout() {
-        return R.layout.fragment_top;
     }
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         super.onBindView(savedInstanceState, rootView);
         initToolBar();
-        for (int i = 0; i < 250; i += 25) {
-            mTabLayout.addTab(mTabLayout.newTab().setText((i + 1) + "-" + (i + 25)));
+        for (int i = 0; i < tagName.length; i++) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(tagName[i]));
         }
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mAdapter.clear();
-                start = tab.getPosition() * 25;
                 if (!call.isExecuted()) {
                     call.cancel();
                 }
-                if (allSubjects.get(start) == null) {
-                    call = setCall().clone();
-                    call.enqueue(TopFragment.this);
-                    progressBar.setVisibility(View.VISIBLE);
-                } else {
-                    mAdapter.replace(allSubjects.subList(start, start + 24));
-                }
+                resetData();
+                mAdapter.clear();
+                tag = tagName[tab.getPosition()];
+                call = setCall().clone();
+                call.enqueue(SearchByTagFragment.this);
+                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -99,18 +85,38 @@ public class TopFragment extends RecyclerFragment<RspModel<List<Subject>>, Subje
     }
 
     @Override
+    public int setLayout() {
+        return R.layout.fragment_search_by_tag;
+    }
+
+    @Override
+    public boolean canLoadMore() {
+        return totalCount > start;
+    }
+
+    @Override
     protected RecyclerAdapter<Subject> setAdapter() {
         return new RecyclerAdapter<Subject>() {
             @Override
             protected int getItemViewType(int position, Subject subject) {
-                return R.layout.item_top;
+                return R.layout.theater_item;
             }
 
             @Override
             protected ViewHolder<Subject> onCreateViewHolder(View root, int viewType) {
-                return new TopHolder(root);
+                return new SearchByTagHolder(root);
             }
         };
+    }
+
+    @Override
+    public void onResponse(Call<RspModel<List<Subject>>> call, Response<RspModel<List<Subject>>> response) {
+        totalCount = response.body().getTotal();
+        if (call.request().url().queryParameter("tag").equals(tag)) {
+            mAdapter.add(response.body().getResult());
+            progressBar.setVisibility(View.GONE);
+        }
+        super.onResponse(call, response);
     }
 
     @Override
@@ -124,18 +130,8 @@ public class TopFragment extends RecyclerFragment<RspModel<List<Subject>>, Subje
     }
 
     @Override
-    public void onResponse(Call<RspModel<List<Subject>>> call, Response<RspModel<List<Subject>>> response) {
-        super.onResponse(call, response);
-        int callStart = Integer.valueOf(call.request().url().queryParameter("start"));
-        for (int i = 0; i < response.body().getResult().size(); i++) {
-            allSubjects.remove(callStart + i);
-            allSubjects.add(callStart + i, response.body().getResult().get(i));
-        }
-        if (start == callStart) {
-            mAdapter.replace(allSubjects.subList(callStart, callStart + 24));
-            progressBar.setVisibility(View.GONE);
-        }
-
+    protected Call<RspModel<List<Subject>>> setCall() {
+        return NetWork.remote().searchMovieByTag(tag, start, count);
     }
 
     private void initToolBar() {
@@ -150,13 +146,7 @@ public class TopFragment extends RecyclerFragment<RspModel<List<Subject>>, Subje
         });
     }
 
-
-    @Override
-    protected Call<RspModel<List<Subject>>> setCall() {
-        return NetWork.remote().getTop250(start, 25);
-    }
-
-    class TopHolder extends RecyclerAdapter.ViewHolder<Subject> {
+    class SearchByTagHolder extends RecyclerAdapter.ViewHolder<Subject> {
         @BindView(R2.id.iv_image)
         ImageView mImage;
         @BindView(R2.id.tv_title)
@@ -169,16 +159,14 @@ public class TopFragment extends RecyclerFragment<RspModel<List<Subject>>, Subje
         TextView mDirector;
         @BindView(R2.id.tv_seen)
         TextView mSeen;
-        @BindView(R2.id.tv_year)
-        TextView mYear;
 
-        public TopHolder(View itemView) {
+        public SearchByTagHolder(View itemView) {
             super(itemView);
         }
 
         @Override
         protected void onBind(Subject subject) {
-            Glide.with(getContext()).load(subject.getImages().getSmall()).into(mImage);
+            Glide.with(SearchByTagFragment.this).load(subject.getImages().getSmall()).into(mImage);
             mTitle.setText(subject.getTitle());
             double rate = subject.getRating().getAverage();
             if (rate == 0) {
@@ -188,7 +176,7 @@ public class TopFragment extends RecyclerFragment<RspModel<List<Subject>>, Subje
                 String str = myformat.format(rate);
                 mRate.setText(String.format(getResources().getString(R.string.detail_rate), str));
             }
-            mYear.setText(subject.getYear() + "年");
+
             TextContentUtil.setDirectorName(getContext(), mDirector, subject.getDirectors());
             TextContentUtil.setCastName(getContext(), mCasts, subject, subject.getCasts().size());
             TextContentUtil.setSeenCount(getContext(), mSeen, subject.getCollectCount());

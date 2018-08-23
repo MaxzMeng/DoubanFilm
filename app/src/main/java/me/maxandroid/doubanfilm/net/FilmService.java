@@ -25,7 +25,7 @@ public interface FilmService {
 
 
     @GET("search")
-    Call<RspModel<List<Subject>>> searchMovieByTag(@Query("tag") String tag);
+    Call<RspModel<List<Subject>>> searchMovieByTag(@Query("tag") String tag, @Query("start") int start, @Query("count") int count);
 
     @GET("search")
     Call<RspModel<List<Subject>>> searchMovieByQ(@Query("q") String Q);

@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="豆瓣TOP250">
+        app:title="找电影">
 
     </android.support.v7.widget.Toolbar>
 

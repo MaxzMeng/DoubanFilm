@@ -94,9 +94,14 @@ public class FindFragment extends RecyclerFragment<List<SimpleSubject>, SimpleSu
 
     }
 
+    @OnClick(R2.id.tv_search)
+    void onSearchClick() {
+        ((MainFragment) getParentFragment()).start(new SearchByQFragment());
+    }
+
     @OnClick(R2.id.ll_search)
     void searchClick() {
-
+        start(new SearchByTagFragment());
     }
 
     @OnClick(R2.id.ll_us)

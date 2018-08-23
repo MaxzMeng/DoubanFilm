@@ -23,6 +23,7 @@
             android:paddingTop="@dimen/statusBarSize">
 
             <me.maxandroid.doubanfilm.common.widget.DrawableCenterTextView
+                android:id="@+id/tv_search"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@drawable/bg_search"

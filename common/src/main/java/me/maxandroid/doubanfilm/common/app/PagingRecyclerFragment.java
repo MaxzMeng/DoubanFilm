@@ -36,6 +36,10 @@ public abstract class PagingRecyclerFragment<RspModel, Model> extends RecyclerFr
     protected void onLoadMore() {
         page++;
         start = page * count;
+        call = setCall().clone();
+        if (Integer.valueOf(call.request().url().queryParameter("start")) < totalCount) {
+            call.enqueue(this);
+        }
     }
 
     protected final void resetData() {
