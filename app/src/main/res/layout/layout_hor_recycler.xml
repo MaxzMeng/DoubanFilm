@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="豆瓣热门"
+            android:text="@string/find_douban_hot"
             android:textSize="18sp"
             android:textStyle="bold" />
 

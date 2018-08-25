@@ -35,6 +35,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 电影详情页
+ *
+ */
 public class DetailFragment extends CallFragment<SubjectRspModel> {
     private static final String SUBJECT_ID = "SUBJECT_ID";
     private String ID;
@@ -188,7 +192,7 @@ public class DetailFragment extends CallFragment<SubjectRspModel> {
         subject = response.body();
         mToolBar.setTitle(subject.getTitle());
         mRateCount.setText(String.format(getResources().getString(R.string.detail_rating_count), subject.getRatingsCount()));
-        mRate.setText(subject.getRating().getAverage() + "");
+        mRate.setText(String.format("%s", subject.getRating().getAverage()));
         mDescription.setText(subject.getSummary());
         mMovieTitle.setText(subject.getTitle());
         mContent.setText(String.format(getResources().getString(R.string.detail_time_and_genres), subject.getYear(), subject.getGenres().get(0)));
@@ -249,8 +253,8 @@ public class DetailFragment extends CallFragment<SubjectRspModel> {
         protected void onBind(Comment comment) {
             Glide.with(getContext()).load(comment.getAvatar()).into(mAvatar);
             mName.setText(comment.getName());
-            mRate.setText(comment.getRate() + "");
-            mVote.setText(comment.getVotes() + "");
+            mRate.setText(String.format("%s", comment.getRate()));
+            mVote.setText(String.format("%s", comment.getVotes()));
             mComment.setText(comment.getText());
             mData.setText(comment.getTime());
 

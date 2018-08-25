@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-
+//从网上找来的sp工具类
 public class SharedPrefsUtil {
 
     /**

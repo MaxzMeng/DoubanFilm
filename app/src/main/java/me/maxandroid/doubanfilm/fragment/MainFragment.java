@@ -5,7 +5,9 @@ import me.maxandroid.doubanfilm.common.widget.bottom.BottomBarFragment;
 import me.maxandroid.doubanfilm.common.widget.bottom.BottomItem;
 
 public class MainFragment extends BottomBarFragment {
-
+    /**
+     * 打开之后显示“热映”界面
+     */
     @Override
     protected int setIndexFragment() {
         return 1;

@@ -136,7 +136,7 @@ public class SearchByQFragment extends RecyclerFragment<RspModel<List<Subject>>,
         protected void onBind(Subject subject) {
             Glide.with(getContext()).load(subject.getImages().getSmall()).into(mImage);
             mTitle.setText(subject.getTitle());
-            mContent.setText(subject.getRating().getAverage() + "分/" + subject.getYear() + "年");
+            mContent.setText(String.format("%s分/%s年", subject.getRating().getAverage(), subject.getYear()));
         }
     }
 

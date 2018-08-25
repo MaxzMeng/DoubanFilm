@@ -60,7 +60,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="找电影"
+                        android:text="@string/find_movie"
                         android:textSize="28sp" />
                 </LinearLayout>
 
@@ -92,7 +92,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
-                            android:text="北美票房榜"
+                            android:text="@string/us_box"
                             android:textSize="22sp" />
                     </LinearLayout>
 
@@ -117,7 +117,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
-                            android:text="豆瓣TOP"
+                            android:text="@string/douban_top"
                             android:textSize="22sp" />
                     </LinearLayout>
                 </LinearLayout>

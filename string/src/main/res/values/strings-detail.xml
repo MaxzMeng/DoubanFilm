@@ -16,5 +16,8 @@
     <string name="detail_rate_no_description">%f</string>
     <string name="detail_rating_count">%d人</string>
     <string name="detail_douban">豆瓣评分</string>
-    <string name="lable_movie">电影</string>
+    <string name="label_movie">电影</string>
+    <string name="detail_comment">评论</string>
+    <string name="detail_cast_information">影人信息</string>
+    <string name="detail_introduce">简介</string>
 </resources>

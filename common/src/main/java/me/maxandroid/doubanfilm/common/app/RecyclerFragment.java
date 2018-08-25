@@ -12,6 +12,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 带有一个RecyclerView的fragment，因为此项目中大量用到了recyclerview，所以封装出来
+ * RspModel为网络请求的返回的数据类型，Model为在ViewHolder中显示的数据类型
+ * 两种数据类型可能一样也可能不一样
+ */
 public abstract class RecyclerFragment<RspModel, Model> extends CallFragment<RspModel> implements RecyclerAdapter.AdapterListener<Model>, Callback<RspModel> {
     protected RecyclerView mRecycler;
     protected RecyclerAdapter<Model> mAdapter;
@@ -30,9 +35,15 @@ public abstract class RecyclerFragment<RspModel, Model> extends CallFragment<Rsp
         mAdapter.setListener(this);
     }
 
+    /**
+     * 从子类中获取adapter
+     */
     protected abstract RecyclerAdapter<Model> setAdapter();
 
-
+    /**
+     * 从子类中获取子类布局中recyclerview的id
+     * 此项目中基本都为recycler
+     */
     @IdRes
     protected abstract int getRecyclerId();
 

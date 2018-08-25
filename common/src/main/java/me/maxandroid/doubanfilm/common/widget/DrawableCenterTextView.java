@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
+//一个另drawable居中的textview
 public class DrawableCenterTextView extends android.support.v7.widget.AppCompatTextView {
 
     public DrawableCenterTextView(Context context, AttributeSet attrs,

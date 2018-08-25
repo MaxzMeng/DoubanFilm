@@ -29,7 +29,7 @@ public abstract class BottomBarFragment extends BaseFragment implements View.OnC
 
     private int mCurrentFragment = 0;
     private int mIndexFragment = 0;
-    private int mClickedColor = Color.BLACK;
+    private int mClickedColor = Color.BLACK;//当图标被点击时的颜色,默认为黑
 
     public void add(BottomItem item, SupportFragment fragment) {
         items.add(item);
@@ -41,7 +41,7 @@ public abstract class BottomBarFragment extends BaseFragment implements View.OnC
         return R.layout.fragment_main;
     }
 
-    protected abstract int setIndexFragment();
+    protected abstract int setIndexFragment();//设置app打开时显示的是list中第几个fragment
 
     protected abstract int setClickColor();
 

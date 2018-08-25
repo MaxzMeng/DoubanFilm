@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -30,12 +29,12 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 城市选择界面
  */
 public class CityPickFragment extends RecyclerFragment<List<Province>, CityModel> {
     private int currentLevel;
-    private static final int PROVINCE_LEVEL = 1;
-    private static final int CITY_LEVEL = 2;
+    private static final int PROVINCE_LEVEL = 1;//当前正在省份选择级别
+    private static final int CITY_LEVEL = 2;//当前正在城市选择级别
     private List<Province> provinceList = new ArrayList<>();
     private List<CityModel> cityList = new ArrayList<>();
     private CityChangeListener listener;
@@ -130,6 +129,7 @@ public class CityPickFragment extends RecyclerFragment<List<Province>, CityModel
                 @Override
                 public int compare(CityModel o1, CityModel o2) {
                     return o1.getAlias().compareTo(o2.getAlias());
+                    //把城市按字典序排序
                 }
             });
             mAdapter.replace(cityList);
@@ -180,6 +180,9 @@ public class CityPickFragment extends RecyclerFragment<List<Province>, CityModel
         }
     }
 
+    /**
+     * 当城市发生变化时，主界面应立即刷新数据且更改sp中储存的数据，利用该接口的回调来实现
+     */
     public interface CityChangeListener {
         void onCityChanged(City city);
     }

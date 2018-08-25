@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolBar"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:background="#00FF7C02"
     android:gravity="center"
-    android:paddingTop="@dimen/statusBarSize"
     app:layout_behavior="me.maxandroid.doubanfilm.TranslucentBehavior"
     app:title="让子弹飞"
     tools:showIn="@layout/fragment_detail">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/statusBarSize">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -40,7 +40,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/lable_movie"
+                android:text="@string/label_movie"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>

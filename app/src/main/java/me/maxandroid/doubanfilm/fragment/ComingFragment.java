@@ -3,7 +3,6 @@ package me.maxandroid.doubanfilm.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +26,7 @@ import retrofit2.Response;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * 正在上映界面
  */
 public class ComingFragment extends RecyclerFragment<List<ComingSubject>, ComingSubject> implements SwipeRefreshLayout.OnRefreshListener {
     @BindView(R2.id.srl_refresh)

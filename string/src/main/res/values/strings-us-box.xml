@@ -5,4 +5,5 @@
     <string name="detail_label_two">%s·%s</string>
     <string name="detail_label_three">%s·%s·%s</string>
     <string name="detail_us_money">票房%d万美元</string>
+    <string name="us_box_title">北美票房榜</string>
 </resources>

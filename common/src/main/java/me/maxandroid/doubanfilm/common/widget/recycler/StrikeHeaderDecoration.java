@@ -21,7 +21,7 @@ import com.bumptech.glide.request.transition.Transition;
 import java.util.HashMap;
 import java.util.Map;
 
-
+//用ItemDecoration实现recyclerview粘性头部效果
 public abstract class StrikeHeaderDecoration extends RecyclerView.ItemDecoration {
     protected String TAG = "QDX";
     private Paint mHeaderTxtPaint;
@@ -49,6 +49,7 @@ public abstract class StrikeHeaderDecoration extends RecyclerView.ItemDecoration
         float total = -fontMetrics.ascent + fontMetrics.descent;
         txtYAxis = total / 2 - fontMetrics.descent;
     }
+
     private boolean isInitHeight = false;
 
     /**

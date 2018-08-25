@@ -7,8 +7,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//带有一个retrofit请求的fragment，请求的返回类型是泛型中的RspModel
 public abstract class CallFragment<RspModel> extends BaseFragment implements Callback<RspModel> {
-    protected boolean firstInit = true;
+    protected boolean firstInit = true;//用来判别数据是否为第一次加载，用来达到非第一次加载显示Toast的效果
     protected Call<RspModel> call;
 
     @Override
@@ -25,7 +26,7 @@ public abstract class CallFragment<RspModel> extends BaseFragment implements Cal
         }
     }
 
-
+    //从子类中获取网络请求，如果不为空就加入请求队列
     protected abstract Call<RspModel> setCall();
 
     @Override

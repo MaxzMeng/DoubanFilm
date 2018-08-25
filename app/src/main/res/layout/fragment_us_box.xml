@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:title="北美票房榜" />
+        app:title="@string/us_box_title" />
 
     <FrameLayout
         android:layout_width="match_parent"
