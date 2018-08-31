@@ -5,7 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetWork {
-    private static final String API_URL = "http://192.168.31.228:3000/movie/";
+    private static final String API_URL = "http://59.67.152.49:30000/movie/";
     private static NetWork instance;
     private Retrofit retrofit;
 
